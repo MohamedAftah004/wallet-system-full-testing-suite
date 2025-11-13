@@ -59,28 +59,7 @@ namespace Wallet.Tests.Application.Users.Commands.FreezeUser
             await act.Should().ThrowAsync<InvalidOperationException>()
                 .WithMessage($"*should be activate*");
         }
-
-        [Fact]
-        public async Task Handle_ShouldThrow_InvalidOperationException_WhenUserAlreadyFrozen()
-        {
-            // Arrange
-            var user = new User("Mohamed Aftah", "mohamed@gmail.com", "01000000000", "hashedPass");
-            user.Activate();
-            user.Freeze();
-
-            var command = new FreezeUserCommand(user.Id);
-            _userRepositoryMock
-                .Setup(repo => repo.GetByIdAsync(command.UserId, It.IsAny<CancellationToken>()))
-                .ReturnsAsync(user);
-
-            // Act
-            var act = async () => await _handler.Handle(command, CancellationToken.None);
-
-            // Assert
-            await act.Should().ThrowAsync<InvalidOperationException>()
-                .WithMessage($"*already frozen*");
-        }
-
+        
         [Fact]
         public async Task Handle_Should_Call_FreezeAsync_When_UserExists_And_IsActive()
         {

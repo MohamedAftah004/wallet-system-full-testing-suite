@@ -60,7 +60,8 @@ namespace Wallet.Tests.Application.Users.Queries.GetUserInfoByPhone
             var query = new GetUserInfoByPhoneQuery(phone);
 
             // Act & Assert
-            await Assert.ThrowsAsync<EntityNotFoundException>(() => _handler.Handle(query, CancellationToken.None));
+            await Assert.ThrowsAsync<EntityNotFoundException>(() =>
+                _handler.Handle(query, CancellationToken.None));
         }
     }
 }

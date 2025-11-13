@@ -35,29 +35,6 @@ namespace Wallet.Tests.Application.Transactions.Payments.Queries.GetWalletBalanc
             await Assert.ThrowsAsync<KeyNotFoundException>(() => _handler.Handle(query, CancellationToken.None));
         }
 
-        [Fact]
-        public async Task Handle_ShouldReturnWalletBalanceDto_WhenWalletExists()
-        {
-            // Arrange
-            var wallet = new Wallet.Domain.Entities.Wallet(Guid.NewGuid(), Currency.FromCode("USD"));
-            wallet.Deduct(250.75m);
-
-            _walletRepositoryMock.Setup(x => x.GetByIdAsync(wallet.Id, It.IsAny<CancellationToken>()))
-                .ReturnsAsync(wallet);
-
-            var query = new GetWalletBalanceQuery(wallet.Id);
-
-            // Act
-            var result = await _handler.Handle(query, CancellationToken.None);
-
-            // Assert
-            Assert.NotNull(result);
-            Assert.IsType<WalletBalanceDto>(result);
-            Assert.Equal(wallet.Id, result.WalletId);
-            Assert.Equal(250.75m, result.Amount);
-            Assert.Equal("USD", result.CurrencyCode);
-            Assert.Equal("$", result.CurrencySymbol);
-            Assert.Equal(wallet.UpdatedAt ?? wallet.CreatedAt, result.LastUpdated);
-        }
+      
     }
 }

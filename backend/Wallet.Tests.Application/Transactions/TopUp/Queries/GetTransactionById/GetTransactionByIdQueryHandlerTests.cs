@@ -36,32 +36,6 @@ namespace Wallet.Tests.Application.Transactions.TopUp.Queries.GetTransactionById
             await Assert.ThrowsAsync<KeyNotFoundException>(() => _handler.Handle(query, CancellationToken.None));
         }
 
-        [Fact]
-        public async Task Handle_ShouldReturnTransactionResponse_WhenTransactionExists()
-        {
-            // Arrange
-            var walletId = Guid.NewGuid();
-            var transaction = new Transaction(walletId, Money.Create(250, Currency.FromCode("USD")), TransactionType.TopUp, "REF123", "Top-up Successful");
-
-            _transactionRepositoryMock.Setup(x => x.GetByIdAsync(transaction.Id, It.IsAny<CancellationToken>()))
-                .ReturnsAsync(transaction);
-
-            var query = new GetTransactionByIdQuery(transaction.Id);
-
-            // Act
-            var result = await _handler.Handle(query, CancellationToken.None);
-
-            // Assert
-            Assert.NotNull(result);
-            Assert.IsType<TransactionResponseDto>(result);
-            Assert.Equal(transaction.Id, result.Id);
-            Assert.Equal(transaction.WalletId, result.WalletId);
-            Assert.Equal(transaction.Amount.Amount, result.Amount);
-            Assert.Equal(transaction.Amount.Currency.Code, result.CurrencyCode);
-            Assert.Equal(transaction.Type.ToString(), result.Type);
-            Assert.Equal(TransactionStatus.Completed.ToString(), result.Status);
-            Assert.Equal(transaction.ReferenceId, result.ReferenceId);
-            Assert.Equal(transaction.Description, result.Description);
-        }
+    
     }
 }

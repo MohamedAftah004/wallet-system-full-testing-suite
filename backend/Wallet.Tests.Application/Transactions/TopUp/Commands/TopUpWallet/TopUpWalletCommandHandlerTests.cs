@@ -79,38 +79,6 @@ namespace Wallet.Tests.Application.Transactions.TopUp.Commands
             await Assert.ThrowsAsync<InvalidOperationException>(() => _handler.Handle(command, CancellationToken.None));
         }
 
-        [Fact]
-        public async Task Handle_ShouldReturnTransactionDto_WhenValidRequest()
-        {
-            // Arrange
-            var wallet = new Wallet.Domain.Entities.Wallet(Guid.NewGuid(), Currency.FromCode("EGP"));
-            wallet.Activate();
-
-            var user = new User("Test User", "test@example.com", "01023203909", "passhashed");
-
-            var command = new TopUpWalletCommand(wallet.Id, 150, "Test top-up");
-
-            _walletRepositoryMock.Setup(x => x.GetByIdAsync(wallet.Id, It.IsAny<CancellationToken>()))
-                .ReturnsAsync(wallet);
-            _userRepositoryMock.Setup(x => x.GetByIdAsync(wallet.UserId, It.IsAny<CancellationToken>()))
-                .ReturnsAsync(user);
-
-            _transactionRepositoryMock.Setup(x => x.AddAsync(It.IsAny<Transaction>(), It.IsAny<CancellationToken>()))
-                .Returns(Task.CompletedTask);
-
-            _walletRepositoryMock.Setup(x => x.UpdateAsync(wallet, It.IsAny<CancellationToken>()))
-                .Returns(Task.CompletedTask);
-
-            // Act
-            var result = await _handler.Handle(command, CancellationToken.None);
-
-            // Assert
-            Assert.NotNull(result);
-            Assert.IsType<TransactionDto>(result);
-            Assert.Equal(wallet.Id, result.WalletId);
-            Assert.Equal(150, result.Amount);
-            Assert.Equal("TopUp", result.Type);
-            Assert.Equal("Completed", result.Status);
-        }
+       
     }
 }

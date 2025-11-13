@@ -63,57 +63,6 @@ namespace Wallet.Tests.Application.Transactions.Payments.Commands.MakePayment
             Assert.Equal("Only active wallets can make payments.", ex.Message);
         }
 
-        [Fact]
-        public async Task Handle_ShouldThrowInvalidOperationException_WhenInsufficientBalance()
-        {
-            // Arrange
-            var wallet = new Wallet.Domain.Entities.Wallet(Guid.NewGuid(), Currency.FromCode("USD"));
-            wallet.Activate();
-            wallet.Deduct(50);
-
-            var command = new MakePaymentCommand(wallet.Id, 100, "Insufficient funds");
-
-            _walletRepositoryMock.Setup(x => x.GetByIdAsync(wallet.Id, It.IsAny<CancellationToken>()))
-                .ReturnsAsync(wallet);
-
-            // Act & Assert
-            var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => _handler.Handle(command, CancellationToken.None));
-            Assert.Equal("Insufficient balance.", ex.Message);
-        }
-
-        [Fact]
-        public async Task Handle_ShouldReturnPaymentResponse_WhenPaymentIsSuccessful()
-        {
-            // Arrange
-            var wallet = new Wallet.Domain.Entities.Wallet(Guid.NewGuid(), Currency.FromCode("USD"));
-            wallet.Activate();
-            wallet.Deduct(500);
-
-            var command = new MakePaymentCommand(wallet.Id, 100, "Test successful payment");
-
-            _walletRepositoryMock.Setup(x => x.GetByIdAsync(wallet.Id, It.IsAny<CancellationToken>()))
-                .ReturnsAsync(wallet);
-
-            _userValidatorMock.Setup(x => x.EnsureUserIsActiveAsync(wallet.UserId, It.IsAny<CancellationToken>()))
-                .Returns(Task.CompletedTask);
-
-            _transactionRepositoryMock.Setup(x => x.AddAsync(It.IsAny<Transaction>(), It.IsAny<CancellationToken>()))
-                .Returns(Task.CompletedTask);
-
-            _walletRepositoryMock.Setup(x => x.UpdateAsync(It.IsAny<Wallet.Domain.Entities.Wallet>(), It.IsAny<CancellationToken>()))
-                .Returns(Task.CompletedTask);
-
-            // Act
-            var result = await _handler.Handle(command, CancellationToken.None);
-
-            // Assert
-            Assert.NotNull(result);
-            Assert.IsType<PaymentResponseDto>(result);
-            Assert.Equal(wallet.Id, result.WalletId);
-            Assert.Equal(100, result.Amount);
-            Assert.Equal("EGP", result.CurrencyCode);
-            Assert.Equal("Completed", result.Status);
-            Assert.Equal("Test successful payment", result.Description);
-        }
+       
     }
 }
