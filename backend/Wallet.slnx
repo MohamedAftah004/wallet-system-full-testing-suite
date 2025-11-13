@@ -1,0 +1,14 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="Wallet.Api/Wallet.Api.csproj" />
+    <Project Path="Wallet.Application/Wallet.Application.csproj" />
+    <Project Path="Wallet.Domain/Wallet.Domain.csproj" />
+    <Project Path="Wallet.Infrastructure/Wallet.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="Wallet.Tests.Api/Wallet.Tests.Api.csproj" Id="e381a6c6-f4de-4217-9661-4b01c1bb63a5" />
+    <Project Path="Wallet.Tests.Application/Wallet.Tests.Application.csproj" Id="7fb97932-50e4-4047-996e-ec542e5fbd5f" />
+    <Project Path="Wallet.Tests.Domain/Wallet.Tests.Domain.csproj" Id="86a4a083-7b8d-420b-8c96-740a86dca3d4" />
+    <Project Path="Wallet.Tests.Infrastructure/Wallet.Tests.Infrastructure.csproj" Id="797fe070-145b-441c-9171-efd4cc780f6f" />
+  </Folder>
+</Solution>
