@@ -98,8 +98,6 @@ wallet-system/
 │   ├── Wallet.Tests.Application
 │   └── Wallet.Tests.Infrastructure
 │
-└── database/
-    └── WalletDb.backup          # Optional for manual API testing
 ```
 
 ---
