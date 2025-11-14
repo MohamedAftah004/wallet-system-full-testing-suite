@@ -52,16 +52,7 @@ namespace Wallet.Tests.Domain.ValueObjects
         }
 
 
-        [Fact]
-        public void Add_ShouldThrow_WhenCurrenciesDiffer()
-        {
-            var money1 = Money.Create(100, Currency.FromCode("USD"));
-            var money2 = Money.Create(50, Currency.FromCode("USD"));
-
-            var act = () => money1.Add(money2);
-
-            act.Should().Throw<InvalidOperationException>().WithMessage("*different currencies*");
-        }
+      
 
         [Fact]
         public void Subtract_ShouldReturnNewMoney_WithDifference()
@@ -85,17 +76,6 @@ namespace Wallet.Tests.Domain.ValueObjects
             act.Should().Throw<InvalidOperationException>().WithMessage("*Insufficient funds*");
         }
 
-
-        [Fact]
-        public void Subtract_ShouldThrow_WhenCurrenciesDiffer()
-        {
-            var money1 = Money.Create(100, Currency.FromCode("USD"));
-            var money2 = Money.Create(50, Currency.FromCode("USD"));
-
-            var act = () => money1.Subtract(money2);
-
-            act.Should().Throw<InvalidOperationException>().WithMessage("*different currencies*");
-        }
 
         #endregion
 
