@@ -1,97 +1,160 @@
 # 🧪 Wallet System — Comprehensive Testing Project (.NET 8)
 
-This repository focuses on building a **fully tested backend system** using **Clean Architecture** and **Unit Testing Best Practices**.
+A backend case-study project focused entirely on **writing professional, maintainable, and fully isolated automated tests** using **Clean Architecture** and modern testing practices.
 
-The main goal of the project is **testing**, not building a wallet application.
+The goal of this repository is **testing quality**, not building a full wallet product.
 
-✔ You will find complete and professional test coverage for:
+This project includes complete test coverage for:
 
 - **Domain Layer**
 - **Application Layer**
 - **Infrastructure Layer**
 
-The wallet system itself exists only as a **practical case study** to demonstrate high-quality test architecture, mocking strategies, test isolation, and real-world scenarios.
+The wallet system serves as a practical example to demonstrate real-world test design, mocking patterns, and clean testing principles.
 
 ---
 
-## 🎯 Project Goal
+## 🎯 Project Purpose
 
-The core purpose is:
+> Build a real backend system that is fully covered with automated tests following Clean Architecture principles.
 
-> **To build a real backend project that is fully covered with automated tests following Clean Architecture principles.**
+This repository helps developers learn:
 
-This repository is perfect for anyone wanting to learn:
-
-- How to write clean and maintainable tests  
-- How to test CQRS + MediatR  
-- How to test EF Core repositories  
-- How to mock external services  
-- How to isolate layers properly  
-- How to structure a test solution for real production apps  
+- How to write clean and reliable unit tests  
+- Testing CQRS (Commands & Queries) with MediatR  
+- Testing EF Core repositories  
+- Mocking external services and dependencies  
+- Isolating architectural layers  
+- Structuring a test solution used in real production systems  
 
 ---
 
-# 🧪 Testing Coverage (Main Focus)
+## 📁 Testing Coverage Overview
 
-## ✔ 1️⃣ Domain Layer Tests
-- Entities behavior  
-- Value objects validation  
+### 1️⃣ Domain Layer Tests
+- Entity behaviors  
+- Value object validation  
 - Business rules  
-- Pure logic without dependencies  
-- 100% isolated and fast tests  
+- Purely isolated logic  
+- Fast, dependency-free tests  
 
-💡 *Domain tests verify that your core business rules never break.*
-
----
-
-## ✔ 2️⃣ Application Layer Tests (CQRS)
-Includes tests for:
-
-- Command Handlers  
-- Query Handlers  
-- Validators (FluentValidation)  
-- MediatR behavior  
-- Business use-cases  
-- Exception handling  
-
-💡 Using **Moq** to mock:
-- Repositories  
-- JWT Token Service  
-- Password Hasher  
-- Unit of Work  
-- External dependencies  
-
-💡 These tests ensure the **business logic is correct** regardless of infrastructure/database.
-
----
-
-## ✔ 3️⃣ Infrastructure Layer Tests
+### 2️⃣ Application Layer Tests (CQRS)
 Covers:
 
-- EF Core Repositories  
-- DbContext interactions  
-- Transactions logic  
-- Data access patterns  
+- Command handlers  
+- Query handlers  
+- FluentValidation validators  
+- MediatR pipeline behavior  
+- Business use-case execution  
+- Error & exception handling  
 
-Using **EF Core InMemory Provider** to test database logic **without an actual database**.
+Using **Moq** for mocking:
 
-💡 Ensures all data operations behave as expected.
+- Repositories  
+- JWT token service  
+- Password hasher  
+- Unit of Work  
+- Any infrastructure dependency  
+
+### 3️⃣ Infrastructure Layer Tests
+Covers:
+
+- EF Core repositories  
+- DbContext behavior  
+- Data transactions  
+- SaveChanges logic  
+
+Using **EF Core InMemory** to test database behavior **without a real database**.
 
 ---
 
-# 🧱 Technology Stack (Testing-Oriented)
+## 🧱 Technology Stack (Testing Focused)
 
-| Layer | Tools / Libraries |
-|-------|------------------|
-| **Unit Testing Framework** | xUnit |
-| **Mocking Framework** | Moq |
-| **Assertions** | FluentAssertions |
-| **Validation** | FluentValidation |
-| **In-Memory Database** | EF Core InMemory |
-| **Architecture** | Clean Architecture |
-| **Patterns** | CQRS, Repository, MediatR |
+| Category | Tools |
+|---------|--------|
+| Unit Testing | xUnit |
+| Mocking | Moq |
+| Assertions | FluentAssertions |
+| Validation | FluentValidation |
+| Database Testing | EF Core InMemory |
+| Architecture | Clean Architecture |
+| Patterns | CQRS, Repository, MediatR |
 
 ---
 
-# 🧩 Project Structure
+## 🧩 Project Structure
 
+```
+wallet-system/
+│
+├── backend/                     # Clean Architecture backend
+│   ├── Wallet.Api
+│   ├── Wallet.Application
+│   ├── Wallet.Domain
+│   └── Wallet.Infrastructure
+│
+├── tests/                       # Core focus — all test layers
+│   ├── Wallet.Tests.Domain
+│   ├── Wallet.Tests.Application
+│   └── Wallet.Tests.Infrastructure
+│
+└── database/
+    └── WalletDb.backup          # Optional for manual API testing
+```
+
+---
+
+## 🚀 Running the Tests
+
+```bash
+cd tests
+dotnet test
+```
+
+- Tests run fully standalone  
+- No database required  
+- No API required  
+
+---
+
+## 🧠 Why This Project Matters
+
+This repository demonstrates:
+
+- Real-world backend testing practices  
+- Cleanly structured and isolated test layers  
+- How to test core backend concepts:
+  - CQRS  
+  - MediatR behavior  
+  - Domain logic & value objects  
+  - Repository behavior  
+  - EF Core operations  
+  - Authentication flows  
+- Helps you gain confidence for backend engineering roles  
+
+---
+
+## 📦 Optional: Running the Backend API
+
+If you want to test the API manually:
+
+```bash
+cd backend/Wallet.Api
+dotnet run
+```
+
+Swagger UI:  
+https://localhost:7124/swagger
+
+(Running the backend is optional — the project is designed to be test-first.)
+
+---
+
+## 👨‍💻 Author
+
+**Mohamed Aftah**  
+Backend Developer — (.NET | Testing | Clean Architecture)
+
+📧 Email: mohamedaftah04@gmail.com  
+🔗 GitHub: https://github.com/MohamedAftah004  
+🔗 LinkedIn: https://www.linkedin.com/in/mabd-elfattah/
