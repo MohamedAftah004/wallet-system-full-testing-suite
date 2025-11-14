@@ -1,157 +1,97 @@
-# 💎 Wallet System — Full Stack Application
+# 🧪 Wallet System — Comprehensive Testing Project (.NET 8)
 
-A complete **Digital Wallet Platform** built using **.NET 9 (Clean Architecture)**, **Angular 20**, and **PostgreSQL 20**.  
-It demonstrates a modern full-stack architecture featuring **secure authentication**, **wallet management**, **transaction tracking**, and **admin dashboards**.
+This repository focuses on building a **fully tested backend system** using **Clean Architecture** and **Unit Testing Best Practices**.
 
----
+The main goal of the project is **testing**, not building a wallet application.
 
-## 🧭 Overview
+✔ You will find complete and professional test coverage for:
 
-The **Wallet System** allows users to:
+- **Domain Layer**
+- **Application Layer**
+- **Infrastructure Layer**
 
-- 🔐 Register & log in securely (JWT-based)
-- 💰 Manage wallets and balances in multiple currencies
-- 💸 Perform and track transactions (Top-up, Payment, Refund)
-- 🧑‍💼 Allow admins to monitor users, wallets, and transactions
-
-The solution follows **Clean Architecture** with **CQRS + MediatR**, ensuring scalability, separation of concerns, and testability.
+The wallet system itself exists only as a **practical case study** to demonstrate high-quality test architecture, mocking strategies, test isolation, and real-world scenarios.
 
 ---
 
-## ⚙️ Tech Stack
+## 🎯 Project Goal
 
-| Layer              | Technology                                  |
-| ------------------ | ------------------------------------------- |
-| **Frontend**       | Angular 20, SCSS, TypeScript                |
-| **Backend**        | .NET 9, Clean Architecture, MediatR, EFCore |
-| **Database**       | PostgreSQL 17                               |
-| **Authentication** | JWT (JSON Web Tokens)                       |
-| **ORM**            | Entity Framework Core                       |
-| **Design Pattern** | CQRS, Repository Pattern                    |
-| **API Docs**       | Swagger / OpenAPI                           |
+The core purpose is:
 
----
+> **To build a real backend project that is fully covered with automated tests following Clean Architecture principles.**
 
-## 🧩 Project Structure
+This repository is perfect for anyone wanting to learn:
 
-```
-wallet-system/
-│
-├── backend/                 # .NET 9 Clean Architecture API
-│   ├── Wallet.Api
-│   ├── Wallet.Application
-│   ├── Wallet.Domain
-│   └── Wallet.Infrastructure
-│
-├── frontend/                # Angular 20 Application
-│   └── src/
-│
-├── database/                # PostgreSQL Backup & Schema
-│   └── WalletDb.backup
-│
-└── README.md                # Root-level documentation (this file)
-```
+- How to write clean and maintainable tests  
+- How to test CQRS + MediatR  
+- How to test EF Core repositories  
+- How to mock external services  
+- How to isolate layers properly  
+- How to structure a test solution for real production apps  
 
 ---
 
-## 🚀 How to Run
+# 🧪 Testing Coverage (Main Focus)
 
-### 🧱 1️⃣ Setup Database
+## ✔ 1️⃣ Domain Layer Tests
+- Entities behavior  
+- Value objects validation  
+- Business rules  
+- Pure logic without dependencies  
+- 100% isolated and fast tests  
 
-Restore the database using **pgAdmin** or CLI:
-
-```bash
-pg_restore -U postgres -d WalletDb "database/WalletDb.backup"
-```
-
-### ⚙️ 2️⃣ Run Backend (.NET 9 API)
-
-```bash
-cd backend/Wallet.Api
-dotnet restore
-dotnet run
-```
-
-API will be running at 👉 **https://localhost:7124**
-
-### 🌐 3️⃣ Run Frontend (Angular 20)
-
-```bash
-cd frontend
-npm install
-ng serve
-```
-
-App available at 👉 **http://localhost:4200**
+💡 *Domain tests verify that your core business rules never break.*
 
 ---
 
-## 📊 Core Features
+## ✔ 2️⃣ Application Layer Tests (CQRS)
+Includes tests for:
 
-### 👤 User
-- Register / Login / Logout  
-- View wallet balance  
-- Perform Top-up / Payment transactions  
-- View transaction history  
+- Command Handlers  
+- Query Handlers  
+- Validators (FluentValidation)  
+- MediatR behavior  
+- Business use-cases  
+- Exception handling  
 
-### 🧑‍💼 Admin
-- View all users, wallets, and transactions  
-- Manage users & transactions  
-- Dashboard analytics (total users, balances, etc.)
+💡 Using **Moq** to mock:
+- Repositories  
+- JWT Token Service  
+- Password Hasher  
+- Unit of Work  
+- External dependencies  
 
----
-
-## 🧠 Technical Highlights
-
-- ✅ Clean separation of layers  
-- ✅ MediatR for CQRS (Command–Query pattern)  
-- ✅ EF Core with Repository abstraction  
-- ✅ FluentValidation for input validation  
-- ✅ Secure JWT-based authentication  
+💡 These tests ensure the **business logic is correct** regardless of infrastructure/database.
 
 ---
 
-## 🧱 Database Schema Overview
+## ✔ 3️⃣ Infrastructure Layer Tests
+Covers:
 
-```
-Users (1) ────< (∞) Wallets (1) ────< (∞) Transactions
-```
+- EF Core Repositories  
+- DbContext interactions  
+- Transactions logic  
+- Data access patterns  
 
-- Each user can have multiple wallets  
-- Each wallet contains multiple transactions  
-- Cascade deletion ensures referential integrity  
+Using **EF Core InMemory Provider** to test database logic **without an actual database**.
 
----
-
-## 🖼️ Screenshots
-
-### 🔐 Authentication
-![Login](./screenshots/login-user.png)
-![Create Account](./screenshots/create-account.png)
-![Select Currency](./screenshots/select-currency.png)
-![Admin Login](./screenshots/admin-login.png)
-
-### 💼 Admin Dashboard
-![Admin Dashboard](./screenshots/admin-dashboard.png)
-![Users Management](./screenshots/users.png)
-![User Actions](./screenshots/user-action.png)
-![Users Transactions](./screenshots/users-transactions.png)
-
-### 👤 User Portal
-![Home](./screenshots/home.png)
-![Profile](./screenshots/profile.png)
-![Payment](./screenshots/payment.png)
-![Transactions](./screenshots/transactions.png)
-![After Disabled User](./screenshots/user-after-disabled.png)
-![Payment Access Limit](./screenshots/payment-access-limit.png)
+💡 Ensures all data operations behave as expected.
 
 ---
 
-## 👨‍💻 Author
+# 🧱 Technology Stack (Testing-Oriented)
 
-**Mohamed Aftah**  
-Full Stack Developer — (.NET | Angular | PostgreSQL)  
+| Layer | Tools / Libraries |
+|-------|------------------|
+| **Unit Testing Framework** | xUnit |
+| **Mocking Framework** | Moq |
+| **Assertions** | FluentAssertions |
+| **Validation** | FluentValidation |
+| **In-Memory Database** | EF Core InMemory |
+| **Architecture** | Clean Architecture |
+| **Patterns** | CQRS, Repository, MediatR |
 
-📧 [mohamedaftah04@gmail.com](mailto:mohamedaftah04@gmail.com)  
-🔗 [GitHub](https://github.com/MohamedAftah004)  
-🔗 [LinkedIn](https://www.linkedin.com/in/mabd-elfattah/)
+---
+
+# 🧩 Project Structure
+
